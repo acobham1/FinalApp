@@ -1,16 +1,5 @@
 package alea.aleac.finalapp;
 
-import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +9,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import alea.aleac.finalapp.BaseActivity;
+import alea.aleac.finalapp.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,7 +18,7 @@ import butterknife.OnClick;
 public class AnimationActivity extends BaseActivity {
 
     @BindView(R.id.anim_tv)
-    ImageButton tv;
+    TextView tv;
 
     private Animation alphaAnimation;
     private Animation rotateAnimation;

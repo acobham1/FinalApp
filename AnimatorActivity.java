@@ -1,4 +1,6 @@
 package alea.aleac.finalapp;
+
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,12 +12,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
+import android.widget.Button;
 import android.widget.TextView;
 
+import alea.aleac.finalapp.BaseActivity;
+import alea.aleac.finalapp.R;
+import alea.aleac.finalapp.dialog.CustomDialog;
 import alea.aleac.finalapp.util.UtilLog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static alea.aleac.finalapp.R.id.anim_tv_bt;
+import static alea.aleac.finalapp.R.id.show_bt;
 
 
 public class AnimatorActivity extends BaseActivity {
@@ -23,71 +32,92 @@ public class AnimatorActivity extends BaseActivity {
 
     private ValueAnimator repeatAnimator;
 
-    @OnClick(R.id.animator_trans)
-    public void trans(){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(tv, "translationX", 0, 200, -200,0,100); //translationY
-        animator.setDuration(2000);
-        animator.start();
-    }
-    @OnClick(R.id.animator_scale)
-    public void scale(){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(tv, "scaleX", 0, 3, 1); //scaleY
-        animator.setDuration(2000);
-        animator.start();
-    }
-    @OnClick(R.id.animator_color)
-    public void color(){
-        ObjectAnimator animator = ObjectAnimator.ofInt(tv, "BackgroundColor", 0xffff00ff, 0xffffff00, 0xffff00ff);
+    @OnClick(show_bt)
+    public void showWhereMehFrom(){
+        ObjectAnimator animator = ObjectAnimator.ofInt(bt, "BackgroundColor", 0x00000000, 0x00000000, 0x00000000);
         animator.setDuration(8000);
         animator.setEvaluator(new ArgbEvaluator());
         animator.start();
-    }
-    @OnClick(R.id.animator_char)
-    public void charFAnim(){
-        ValueAnimator animator = ValueAnimator.ofObject(new CharEvaluator(),new Character('A'),new Character('Z'));
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                char text = (char)animation.getAnimatedValue();
-                tv.setText(String.valueOf(text));
-            }
-        });
-        animator.setDuration(10000);
-        animator.setInterpolator(new AccelerateInterpolator());
+        animator.end();
+        animator = ObjectAnimator.ofInt(tv, "TextColor", 0xffff0000, 0xffcccccc, 0xff000000);
+        animator.setDuration(8000);
+        animator.setEvaluator(new ArgbEvaluator());
         animator.start();
+
     }
-    @OnClick(R.id.animator_alpha)
-    public void alpha(){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(tv,"alpha",1,0,1);
-        animator.setDuration(2000);
-        animator.start();
+
+    @OnClick(anim_tv_bt)
+    public void clickQuestion(){
+        customDialog();
     }
-    @OnClick(R.id.animator_rotation)
-    public void rotation(){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(tv,"rotation",0,180,0);//rotationX   rotationY
-        animator.setDuration(2000);
-        animator.start();
-    }
+
+//    @OnClick(R.id.animator_trans)
+//    public void trans(){
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(tv, "translationX", 0, 200, -200,0,100); //translationY
+//        animator.setDuration(2000);
+//        animator.start();
+//    }
+//    @OnClick(R.id.animator_scale)
+//    public void scale(){
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(tv, "scaleX", 0, 3, 1); //scaleY
+//        animator.setDuration(2000);
+//        animator.start();
+//    }
+//    @OnClick(R.id.animator_color)
+//    public void color(){
+//        ObjectAnimator animator = ObjectAnimator.ofInt(tv, "BackgroundColor", 0xffff0000, 0xffffffff, 0xff000000);
+//        animator.setDuration(8000);
+//        animator.setEvaluator(new ArgbEvaluator());
+//        animator.start();
+//    }
+//    @OnClick(R.id.animator_char)
+//    public void charFAnim(){
+//        ValueAnimator animator = ValueAnimator.ofObject(new CharEvaluator(),new Character('A'),new Character('Z'));
+//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animation) {
+//                char text = (char)animation.getAnimatedValue();
+//                tv.setText(String.valueOf(text));
+//            }
+//        });
+//        animator.setDuration(10000);
+//        animator.setInterpolator(new AccelerateInterpolator());
+//        animator.start();
+//    }
+//    @OnClick(R.id.animator_alpha)
+//    public void alpha(){
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(tv,"alpha",1,0,1);
+//        animator.setDuration(2000);
+//        animator.start();
+//    }
+//    @OnClick(R.id.animator_rotation)
+//    public void rotation(){
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(tv,"rotation",0,180,0);//rotationX   rotationY
+//        animator.setDuration(2000);
+//        animator.start();
+//    }
 
 
 
-    @OnClick(R.id.animator_bt_start)
-    public void startAnimator(){
-        repeatAnimator = doAnimatorListener();
-//        repeatAnimator.setStartDelay(3000);
-        repeatAnimator.start();
-    }
-
-    @OnClick(R.id.animator_bt_cancel)
-    public void cancleAnimator(){
-        repeatAnimator.removeAllListeners();
-        repeatAnimator.removeAllUpdateListeners();
-        repeatAnimator.cancel();
-    }
+//    @OnClick(R.id.animator_bt_start)
+//    public void startAnimator(){
+//        repeatAnimator = doAnimatorListener();
+////        repeatAnimator.setStartDelay(3000);
+//        repeatAnimator.start();
+//    }
+//
+//    @OnClick(R.id.animator_bt_cancel)
+//    public void cancleAnimator(){
+//        repeatAnimator.removeAllListeners();
+//        repeatAnimator.removeAllUpdateListeners();
+//        repeatAnimator.cancel();
+//    }
 
     @BindView(R.id.animator_tv)
     TextView tv;
 
+    @BindView(R.id.show_bt)
+    Button bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +131,20 @@ public class AnimatorActivity extends BaseActivity {
                 toastShort("Click");
             }
         });
+    }
+
+    private void customDialog() {
+        final CustomDialog dialog = new CustomDialog(this, new CustomDialog.ICustomDialogEventListener(){
+            @Override
+            public void OnClickListener() {
+                Intent intent = new Intent();
+                intent.putExtra("message", "Dialog");
+                setResult(RESULT_OK, intent);
+                //super.onBackPressed();
+                finish();
+            }
+        });
+        dialog.show();
     }
 
     private ValueAnimator doAnimatorListener(){

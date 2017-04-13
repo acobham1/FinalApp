@@ -31,7 +31,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         fragmentList.add(new firstFragment());
         fragmentList.add(new secondFragment());
         fragmentList.add(new thirdFragment());
-        fragmentList.add(new fourthFragment());
+//        fragmentList.add(new fourthFragment());
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this.getSupportFragmentManager());
         viewPagerAdapter.setContent(fragmentList);
         viewPager.setAdapter(viewPagerAdapter);
